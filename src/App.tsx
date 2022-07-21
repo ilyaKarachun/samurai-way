@@ -5,6 +5,7 @@ import Nav from "./components/Nav";
 import Profile from "./components/Profile";
 
 
+
 const App = () => {
     return (
         <div className="app-wrapper">
