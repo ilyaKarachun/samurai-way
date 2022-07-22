@@ -12,8 +12,8 @@ export const MyPosts = () => {
                     <button>Remove post</button>
                 </div>
             </div>
-            <Post/>
-            <Post/>
+            <Post message={"Hello,bro"} like={15}/>
+            <Post message={"Hello, Man. How r u?"} like={10}/>
             </div>
     )
 }
