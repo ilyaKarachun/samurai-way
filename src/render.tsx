@@ -1,17 +1,9 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App, {AppType} from './App';
-import {
-    addNewTextMessage,
-    onChangeNewTextMessageHandler,
-    state,
-    subscribe,
-    updateNewPostChange
-} from "./components/redux/state";
+import ReactDOM from "react-dom";
 import {BrowserRouter} from "react-router-dom";
-
-
+import App, {AppStateType, AppType} from "./App";
+// import {state} from "./components/redux/state";
+import React, {FC} from "react";
+import {addNewTextMessage, onChangeNewTextMessageHandler, updateNewPostChange} from "./components/redux/state";
 
  const rerenderEntireTree = (state: AppType ) => {
     ReactDOM.render(
@@ -25,6 +17,3 @@ import {BrowserRouter} from "react-router-dom";
         document.getElementById('root')
     );
 }
-rerenderEntireTree(state)
-
-subscribe(rerenderEntireTree)

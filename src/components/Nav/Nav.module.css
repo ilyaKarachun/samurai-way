@@ -1,8 +1,15 @@
 .nav {
     grid-area: n;
     background-color: blanchedalmond;
+
 }
 
-.item {
-    color: white;
+.item a{
+    color: blue;
+    text-decoration: none;
+}
+
+.item .active {
+    color: gold;
+    text-decoration: none;
 }

@@ -1,0 +1,22 @@
+.dialogs__main {
+    display: grid;
+    grid-template-columns: 100px 400px;
+    gap: 40px;
+    background-color: lightgoldenrodyellow;
+}
+
+.dialogs {
+
+}
+
+.dialog {
+
+}
+
+.messages {
+
+}
+
+.message {
+
+}
