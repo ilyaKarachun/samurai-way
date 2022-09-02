@@ -1,6 +1,5 @@
 import React, {createRef, FC} from "react";
-import s from "../dialogies.module.css";
-import {addNewTextMessage, onChangeNewTextMessageHandler} from "../../redux/state";
+import s from "../Dialog/dialogies.module.css";
 
 // export const Message: FC<MessageType> = (props) => {
 //     return (
@@ -11,8 +10,8 @@ import {addNewTextMessage, onChangeNewTextMessageHandler} from "../../redux/stat
 export type MessageType = {
     message: string
     newTextMessage: string
-    onChangeNewTextMessageHandler: (postMessageRef: string) => void
-    addNewTextMessage: () => void
+    // onChangeNewTextMessageHandler: (postMessageRef: string) => void
+    // addNewTextMessage: () => void
 }
 
 
@@ -20,12 +19,12 @@ export const Message: FC<MessageType> = (props) => {
     let postMessageRef = React.createRef<HTMLTextAreaElement>()
 
     const addPostHandler = () => {
-        props.addNewTextMessage()
+        // props.addNewTextMessage()
     }
 
     const onChangeNewTextMessageHandler = () => {
         let newText = postMessageRef.current?.value
-        props.onChangeNewTextMessageHandler(newText ? newText : '')
+        // props.onChangeNewTextMessageHandler(newText ? newText : '')
 
     }
     return (

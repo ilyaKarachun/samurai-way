@@ -3,14 +3,14 @@ import './App.css';
 import Header from "./components/Header/Header";
 import Nav from "./components/Nav/Nav";
 import Profile from "./components/Profile/Profile";
-import {Dialogies} from "./components/Dialogies/dialogies";
-import s from "./components/Dialogies/dialogies.module.css";
-import {BrowserRouter, Route} from "react-router-dom";
+import {Dialogs} from "./components/Dialogies/Dialog/dialogs";
+import s from "./components/Dialogies/Dialog/dialogies.module.css";
+import {Route} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
 import {Friends, FriendsType} from "./components/Friends/Friends";
-import {addNewTextMessage, addPost, onChangeNewTextMessageHandler, updateNewPostChange} from "./components/redux/state";
+import {DialogsContainer} from "./components/Dialogies/Dialog/dialogsContainer";
 
 export type messagesDataType = {
     id: number,
@@ -18,9 +18,10 @@ export type messagesDataType = {
 
 }
 
-type messagesPageType = {
-    messagesData: Array<messagesDataType>
-    newTextMessage: string
+export type messagesPageType = {
+    messages: Array<messagesDataType>
+    dialog: string
+    newMessageBody: string
 }
 
 export type dialogiesDataType = {
@@ -36,25 +37,26 @@ export type MyPostsDataType = {
 }
 
 type UserProfileType = {
-    MyPostsData: Array<MyPostsDataType>
+    posts: Array<MyPostsDataType>
     newPostText: string
-    dialogiesData: Array<dialogiesDataType>
+    dialogs: Array<dialogiesDataType>
     nameFriends: Array<FriendsType>
 }
 
 export type AppType = {
-    UserProfile: UserProfileType
-    messagesPage: messagesPageType
+    profilePage: UserProfileType
+    dialogsPage: messagesPageType
 }
 
 export type AppStateType = {
-    AppState: AppType
-    updateNewPostChange: (newText: string) => void
-    onChangeNewTextMessageHandler: (newText: string) => void
-    addNewTextMessage: () => void
+    store: AppType
+    // updateNewPostChange: (newText: string) => void
+    // onChangeNewTextMessageHandler: (newText: string) => void
+    // addNewTextMessage: () => void
+    // addPost: () => void
+    dispatch: (action: { type: string, [key: string]: string }) => void
 }
 
-// addPost("How much money you need")
 
 const App: FC<AppStateType> = (props) => {
 
@@ -65,23 +67,25 @@ const App: FC<AppStateType> = (props) => {
             <Nav/>
             <div className={s.item}>
                 <Route path={'/profile'} render={() => <Profile
-                    newPostText={props.AppState.UserProfile.newPostText}
-                    state={props.AppState.UserProfile.MyPostsData}
-                    addPost={addPost}
-                    updateNewPostChange={updateNewPostChange}
+                    // newPostText={props.AppState.UserProfile.newPostText}
+                    // state={props.AppState.UserProfile.MyPostsData}
+                    store={props.store}
+                    // dispatch={props.dispatch}
                 />}/>
                 <Route path='/dialogies'
-                       render={() => <Dialogies dialogiesData={props.AppState.UserProfile.dialogiesData}
-                                                messagesData={props.AppState.messagesPage.messagesData}
-                                                newTextMessage={props.AppState.messagesPage.newTextMessage}
-                                                onChangeNewTextMessageHandler={props.onChangeNewTextMessageHandler}
-                                                addNewTextMessage={props.addNewTextMessage}
+                       render={() => <DialogsContainer
+                           store={props.store}
+                           // dialogiesData={props.AppState.UserProfile.dialogiesData}
+                           // messagesData={props.AppState.messagesPage.messagesData}
+                           // newTextMessage={props.AppState.messagesPage.newTextMessage}
+                           // onChangeNewTextMessageHandler={props.onChangeNewTextMessageHandler}
+                           // addNewTextMessage={props.addNewTextMessage}
                        />}/>
                 <Route path='/news' render={() => < News/>}/>
                 <Route path='/music' render={() => <Music/>}/>
                 <Route path='/settings' render={() => <Settings/>}/>
             </div>
-            <Friends state={props.AppState.UserProfile.nameFriends}/>
+            <Friends state={props.store.profilePage.nameFriends}/>
         </div>
 
     );

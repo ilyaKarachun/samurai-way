@@ -1,43 +1,53 @@
 import React, {FC} from "react";
 import {Post} from "./Post";
 import {MyPostsDataType} from "./Profile";
-import {updateNewPostChange} from "../redux/state";
+import {addPostActionCreator, onChangePostActionCreator} from "../redux/UserProfileReducer";
 
 type MyPostsType = {
-    steak: Array<MyPostsDataType>
+    store: Array<MyPostsDataType>
     addPost: () => void
     newPostText: string
     updateNewPostChange: (newText: string) => void
+    dispatch?: (action: { type: string, newText: string }) => void
+    posts: string
 }
 
+// let addPostActionCreator = () => {
+//     return {
+//         type: "ADD-POST"
+//     }
+// }
+//
+// let onChangePostActionCreator = (text: string) => {
+//     return {type: "update - NewPostChange", newText: text }
+// }
+
 export const MyPosts: FC<MyPostsType> = (props) => {
-    let newPost = React.createRef<HTMLTextAreaElement>();
-    const addPostHandler = () => {
-        // let text = newPost.current?.value
-        // if (text) {
-            props.addPost()
-        // }
-        // if (newPost.current?.value) {
-        //     newPost.current.value = ''
-        // }
-        // props.updateNewPostChange('')
+    let newPostElement = React.createRef<HTMLTextAreaElement>();
+    const onAddPost = () => {
+        props.addPost()
     }
 
-    const onChangePostHandler = () => {
-        let text = newPost.current?.value
+    const onPostChange = () => {
+        const text = newPostElement.current && newPostElement.current.value
         props.updateNewPostChange(text ? text : '')
     }
+
     return (
         <div>
             <div>
-                My post
+                My posts
                 <div>
-                    <textarea ref={newPost} onChange={onChangePostHandler} value={props.newPostText}/>
-                    <button onClick={addPostHandler}>Add post</button>
+                    <textarea
+                        ref={newPostElement}
+                        onChange={onPostChange}
+                        value={props.newPostText}
+                    />
+                    <button onClick={onAddPost}>Add post</button>
                     <button>Remove post</button>
                 </div>
             </div>
-            {props.steak.map(el => <Post message={el.message} like={el.like}/>)}
+            {props.store.map(el => <Post message={el.message} like={el.like}/>)}
             {/*<Post message={MyPostsData[0].message} like={MyPostsData[0].like}/>*/}
             {/*<Post message={MyPostsData[1].message} like={MyPostsData[1].like}/>*/}
         </div>

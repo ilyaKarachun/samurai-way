@@ -1,19 +1,19 @@
 import ReactDOM from "react-dom";
 import {BrowserRouter} from "react-router-dom";
-import App, {AppStateType, AppType} from "./App";
-// import {state} from "./components/redux/state";
+import App, { AppType} from "./App";
 import React, {FC} from "react";
-import {addNewTextMessage, onChangeNewTextMessageHandler, updateNewPostChange} from "./components/redux/state";
+import store from "./components/redux/store";
 
- const rerenderEntireTree = (state: AppType ) => {
-    ReactDOM.render(
-        <BrowserRouter>
-            <App AppState={state}
-                 updateNewPostChange={updateNewPostChange}
-                 onChangeNewTextMessageHandler={onChangeNewTextMessageHandler}
-                 addNewTextMessage={addNewTextMessage}
-            />
-        </BrowserRouter>,
-        document.getElementById('root')
-    );
-}
+//  export const rerenderEntireTree = (state: AppType ) => {
+//     ReactDOM.render(
+//         <BrowserRouter>
+//             <App AppState={store.getState()}
+//                  updateNewPostChange={store.updateNewPostChange.bind(store) }
+//                  onChangeNewTextMessageHandler={store.onChangeNewTextMessageHandler.bind(store) }
+//                  addNewTextMessage={store.addNewTextMessage.bind(store) }
+//                  addPost={store.addPost.bind(store)}
+//             />
+//         </BrowserRouter>,
+//         document.getElementById('root')
+//     );
+// }
